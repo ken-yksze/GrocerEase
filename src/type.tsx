@@ -98,6 +98,10 @@ export interface User {
   groceryLists: GroceryList[];
 }
 
-export interface UserContextType {
+export interface DbContextType {
   user: User;
+  stores: Store[];
+  categories: Category[];
+  offers: Offer[];
+  groceries: Grocery[];
 }
