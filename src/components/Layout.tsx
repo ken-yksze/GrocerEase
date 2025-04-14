@@ -11,6 +11,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "stretch",
+        backgroundColor: "#FFF8F0",
       }}
     >
       <TopBar />
@@ -18,8 +19,9 @@ const Layout = ({ children }: { children: ReactNode }) => {
         sx={{
           flexGrow: 1,
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          flexDirection: "column",
+          paddingX: "2.5em",
+          overflowY: "auto",
         }}
       >
         {children}

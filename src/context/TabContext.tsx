@@ -1,8 +1,36 @@
-import { Tabs, TabContextType } from "../type";
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { DbContext } from "./DbContext";
+import { Tabs, TabContextType, Grocery } from "../type";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import ProductPage from "../pages/ProductPage";
 
 const HomePage = () => {
-  return <>Home</>;
+  const { groceries } = useContext(DbContext);
+
+  const { setCurrentPage } = useContext(TabContext);
+
+  const switchProduct = (grocery: Grocery) => {
+    setCurrentPage(<ProductPage grocery={grocery} />);
+  };
+
+  return (
+    <>
+      {groceries.map((grocery) => (
+        <img
+          src={grocery.image}
+          width={300}
+          onClick={() => {
+            switchProduct(grocery);
+          }}
+        ></img>
+      ))}
+    </>
+  );
 };
 
 const tabs: Tabs = {

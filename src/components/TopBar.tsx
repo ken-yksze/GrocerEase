@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { TabContext } from "../context/TabContext";
-import { Box, Typography, IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { Icon } from "@iconify/react";
 
 const TopBar = () => {
-  const { currentTab } = useContext(TabContext);
+  const { heading } = useContext(TabContext);
 
   return (
     <Box
@@ -16,9 +16,7 @@ const TopBar = () => {
         alignItems: "center",
       }}
     >
-      <Typography sx={{ fontWeight: 700, fontSize: "1.666em" }}>
-        {currentTab}
-      </Typography>
+      <Box>{heading}</Box>
       <IconButton
         sx={{
           ":focus": { outline: "none" },

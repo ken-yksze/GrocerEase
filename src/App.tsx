@@ -4,9 +4,9 @@ import Layout from "./components/Layout";
 import "./App.css";
 
 function App() {
-  const { tabs, currentTab } = useContext(TabContext);
+  const { currentPage } = useContext(TabContext);
 
-  return <Layout>{tabs[currentTab].page}</Layout>;
+  return <Layout>{currentPage}</Layout>;
 }
 
 export default App;
