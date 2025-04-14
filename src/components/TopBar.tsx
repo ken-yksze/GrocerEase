@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { TabContext } from "../context/TabContext";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, IconButton } from "@mui/material";
 import { Icon } from "@iconify/react";
 
 const TopBar = () => {
@@ -19,7 +19,18 @@ const TopBar = () => {
       <Typography sx={{ fontWeight: 700, fontSize: "1.666em" }}>
         {currentTab}
       </Typography>
-      <Icon icon="hugeicons:menu-01" width="2em" height="2em" />
+      <IconButton
+        sx={{
+          ":focus": { outline: "none" },
+          ":hover": { background: "none" },
+          width: "2em",
+          height: "2em",
+          color: "black",
+        }}
+        disableRipple
+      >
+        <Icon icon="hugeicons:menu-01" width="2em" height="2em" />
+      </IconButton>
     </Box>
   );
 };

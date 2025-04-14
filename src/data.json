@@ -1,0 +1,101 @@
+{
+  "stores": [
+    {
+      "id": 1,
+      "name": "Walmart Supercentre",
+      "address": "2245 Islington Ave, Toronto, ON M9W 3W6",
+      "lat": 43.7142165,
+      "lng": -79.5558925
+    },
+    {
+      "id": 2,
+      "name": "Costco Wholesale",
+      "address": "55 New Huntington Rd, Vaughan, ON L4H 0S8",
+      "lat": 43.7699797,
+      "lng": -79.6422665
+    },
+    {
+      "id": 3,
+      "name": "Metro",
+      "address": "201 Lloyd Manor Rd, Toronto, ON M9B 5K6",
+      "lat": 43.6751567,
+      "lng": -79.5581709
+    },
+    {
+      "id": 4,
+      "name": "Jason's NOFRILLS Etobicoke",
+      "address": "1530 Albion Rd, Etobicoke, ON M9V 1B4",
+      "lat": 43.7219291,
+      "lng": -79.692969
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Dairy",
+      "image": "category1.png"
+    },
+    {
+      "id": 2,
+      "name": "Produce",
+      "image": "category2.png"
+    },
+    {
+      "id": 3,
+      "name": "Bakery",
+      "image": "category3.png"
+    }
+  ],
+  "groceries": [
+    {
+      "id": 1,
+      "name": "Cracker Barrel",
+      "fullName": "Cracker Barrel Cheese Pizza Mozzarella",
+      "image": "grocery1.png",
+      "categoryId": 1,
+      "priceType": "quantity",
+      "weight": 400,
+      "calories": 120,
+      "protein": 15,
+      "carbohydrates": 9,
+      "fat": 0.5,
+      "healthScore": 8,
+      "healthFactors": ["Low Carb", "Probiotic", "No Sugar Added"]
+    }
+  ],
+  "prices": [
+    {
+      "id": 1,
+      "value": 5.5,
+      "discount": null,
+      "storeId": 1,
+      "groceryId": 1
+    },
+    {
+      "id": 2,
+      "value": 5.8,
+      "discount": null,
+      "storeId": 3,
+      "groceryId": 1
+    },
+    {
+      "id": 3,
+      "value": 6.0,
+      "discount": null,
+      "storeId": 4,
+      "groceryId": 1
+    }
+  ],
+  "offers": [
+    {
+      "id": 1,
+      "categoryId": 2,
+      "discount": {
+        "value": 50,
+        "unit": "%"
+      },
+      "endDate": "2025-03-01T23:59:59Z",
+      "image": "offer1.png"
+    }
+  ]
+}
