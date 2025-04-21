@@ -21,8 +21,14 @@
     {
       "id": 4,
       "name": "NoFrills",
-      "address": "1530 Albion Rd, Etobicoke, ON M9V 1B4",
+      "address": "6220 Yonge St, North York, ON M2M 3X4",
       "image": "nofrills.png"
+    },
+    {
+      "id": 5,
+      "name": "FreshCo",
+      "address": "7205 Goreway Dr, Mississauga, ON L4T 0B4",
+      "image": "freshco.png"
     }
   ],
   "categories": [
@@ -87,6 +93,96 @@
       "fat": 2,
       "healthScore": 10,
       "healthFactors": ["Low Carb"]
+    },
+    {
+      "id": 4,
+      "name": "Blue Diamond Almonds",
+      "fullName": "Blue Diamond Almond Milk Breeze Original",
+      "image": "almond1.webp",
+      "categoryId": 1,
+      "priceType": "quantity",
+      "weight": 946,
+      "calories": 110,
+      "protein": 14,
+      "carbohydrates": 5,
+      "fat": 2,
+      "healthScore": 10,
+      "healthFactors": ["Low Carb", "No Sugar Added"]
+    },
+    {
+      "id": 5,
+      "name": "Silk Almond Milk",
+      "fullName": "Silk Almond Milk Alternative, Original, Dairy Free",
+      "image": "almond2.webp",
+      "categoryId": 1,
+      "priceType": "quantity",
+      "weight": 1946,
+      "calories": 110,
+      "protein": 14,
+      "carbohydrates": 5,
+      "fat": 2,
+      "healthScore": 10,
+      "healthFactors": ["Low Carb", "No Sugar Added"]
+    },
+    {
+      "id": 6,
+      "name": "Standard Quaker Oats",
+      "fullName": "Quaker Quick Oats",
+      "image": "oat1.webp",
+      "categoryId": 1,
+      "priceType": "quantity",
+      "weight": 2250,
+      "calories": 110,
+      "protein": 14,
+      "carbohydrates": 5,
+      "fat": 2,
+      "healthScore": 10,
+      "healthFactors": ["Low Carb", "No Sugar Added"]
+    },
+    {
+      "id": 7,
+      "name": "Great Value Quick Oats",
+      "fullName": "Great Value Quick Oats 1 kg, 100% Whole Grain Rolled Oats",
+      "image": "oat2.webp",
+      "categoryId": 1,
+      "priceType": "quantity",
+      "weight": 1000,
+      "calories": 110,
+      "protein": 14,
+      "carbohydrates": 5,
+      "fat": 2,
+      "healthScore": 10,
+      "healthFactors": ["Low Carb", "No Sugar Added"]
+    },
+    {
+      "id": 8,
+      "name": "Chicken Thighs",
+      "fullName": "Prime Bone-in Chicken Thighs Raised Without Antibiotics, 6-8 Thighs",
+      "image": "chicken.png",
+      "categoryId": 2,
+      "priceType": "quantity",
+      "weight": 1000,
+      "calories": 110,
+      "protein": 14,
+      "carbohydrates": 5,
+      "fat": 2,
+      "healthScore": 10,
+      "healthFactors": ["Low Carb", "No Sugar Added"]
+    },
+    {
+      "id": 9,
+      "name": "Spinach",
+      "fullName": "Your Fresh Market Spinach",
+      "image": "spinach.png",
+      "categoryId": 2,
+      "priceType": "quantity",
+      "weight": 227,
+      "calories": 110,
+      "protein": 14,
+      "carbohydrates": 5,
+      "fat": 2,
+      "healthScore": 10,
+      "healthFactors": ["Low Carb", "No Sugar Added"]
     }
   ],
   "prices": [
@@ -161,6 +257,181 @@
       },
       "storeId": 2,
       "groceryId": 1
+    },
+    {
+      "id": 9,
+      "value": 2.79,
+      "discount": null,
+      "storeId": 5,
+      "groceryId": 4
+    },
+    {
+      "id": 10,
+      "value": 4.99,
+      "discount": null,
+      "storeId": 1,
+      "groceryId": 4
+    },
+    {
+      "id": 11,
+      "value": 5.99,
+      "discount": null,
+      "storeId": 3,
+      "groceryId": 4
+    },
+    {
+      "id": 12,
+      "value": 5.99,
+      "discount": null,
+      "storeId": 4,
+      "groceryId": 4
+    },
+    {
+      "id": 13,
+      "value": 6.99,
+      "discount": null,
+      "storeId": 5,
+      "groceryId": 5
+    },
+    {
+      "id": 14,
+      "value": 5.99,
+      "discount": null,
+      "storeId": 1,
+      "groceryId": 5
+    },
+    {
+      "id": 15,
+      "value": 7.99,
+      "discount": null,
+      "storeId": 3,
+      "groceryId": 5
+    },
+    {
+      "id": 16,
+      "value": 7.99,
+      "discount": null,
+      "storeId": 4,
+      "groceryId": 5
+    },
+    {
+      "id": 17,
+      "value": 99.99,
+      "discount": null,
+      "storeId": 5,
+      "groceryId": 1
+    },
+    {
+      "id": 18,
+      "value": 5.99,
+      "discount": null,
+      "storeId": 1,
+      "groceryId": 6
+    },
+    {
+      "id": 19,
+      "value": 7.99,
+      "discount": null,
+      "storeId": 3,
+      "groceryId": 6
+    },
+    {
+      "id": 20,
+      "value": 7.99,
+      "discount": null,
+      "storeId": 4,
+      "groceryId": 6
+    },
+    {
+      "id": 21,
+      "value": 9.99,
+      "discount": null,
+      "storeId": 5,
+      "groceryId": 6
+    },
+    {
+      "id": 22,
+      "value": 3.99,
+      "discount": null,
+      "storeId": 1,
+      "groceryId": 7
+    },
+    {
+      "id": 23,
+      "value": 4.99,
+      "discount": null,
+      "storeId": 3,
+      "groceryId": 7
+    },
+    {
+      "id": 24,
+      "value": 3.99,
+      "discount": null,
+      "storeId": 4,
+      "groceryId": 7
+    },
+    {
+      "id": 25,
+      "value": 2.77,
+      "discount": null,
+      "storeId": 5,
+      "groceryId": 7
+    },
+    {
+      "id": 26,
+      "value": 4,
+      "discount": null,
+      "storeId": 1,
+      "groceryId": 8
+    },
+    {
+      "id": 27,
+      "value": 4,
+      "discount": null,
+      "storeId": 3,
+      "groceryId": 8
+    },
+    {
+      "id": 28,
+      "value": 3,
+      "discount": null,
+      "storeId": 4,
+      "groceryId": 8
+    },
+    {
+      "id": 29,
+      "value": 5,
+      "discount": null,
+      "storeId": 5,
+      "groceryId": 8
+    },
+    {
+      "id": 30,
+      "value": 2.02,
+      "discount": null,
+      "storeId": 1,
+      "groceryId": 9
+    },
+    {
+      "id": 31,
+      "value": 2.02,
+      "discount": null,
+      "storeId": 3,
+      "groceryId": 9
+    },
+    {
+      "id": 32,
+      "value": 2.02,
+      "discount": null,
+      "storeId": 4,
+      "groceryId": 9
+    },
+    {
+      "id": 33,
+      "value": 1.44,
+      "discount": null,
+      "storeId": 5,
+      "groceryId": 9
     }
   ],
   "offers": [
