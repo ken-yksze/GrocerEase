@@ -9,15 +9,26 @@ import {
   DiscountUnit,
   Price,
   PriceType,
+  GroceryListItem,
 } from "../type";
-import { createContext, ReactNode, useEffect } from "react";
+import {
+  createContext,
+  ReactNode,
+  useEffect,
+  useState,
+  useContext,
+} from "react";
+import { TabContext } from "./TabContext";
 
-const user = {
+const getDefaultIfNaN = (value: number, defaultValue: number) => {
+  return isNaN(value) ? defaultValue : value;
+};
+
+const defaultUser = {
   id: 1,
   firstName: "User",
   lastName: "",
   thumbnail: "thumbnail.png",
-  groceryLists: JSON.parse(localStorage.getItem("groceryLists") ?? "[]"),
 };
 
 const stores: Store[] = data.stores;
@@ -72,8 +83,7 @@ const groceries: Grocery[] = data.groceries.map((grocery): Grocery => {
         id: 0,
         name: "",
         address: "",
-        lat: 0,
-        lng: 0,
+        image: "",
       };
 
       return {
@@ -103,29 +113,135 @@ const groceries: Grocery[] = data.groceries.map((grocery): Grocery => {
 });
 
 const DbContext = createContext<DbContextType>({
-  user: user,
+  user: defaultUser,
+  setUser: () => null,
   stores: stores,
   categories: categories,
   offers: offers,
   groceries: groceries,
+  groceryList: [],
+  addToGroceryList: () => null,
+  removeFromGroceryList: () => null,
+  newItems: 0,
+  setNewItems: () => null,
 });
 
 const DbContextProvider = ({ children }: { children: ReactNode }) => {
+  const { setMessage } = useContext(TabContext);
+  const [groceryList, setGroceryList] = useState<GroceryListItem[]>(
+    JSON.parse(localStorage.getItem("groceryList") ?? "[]")
+  );
+
+  const [newItems, setNewItems] = useState(
+    getDefaultIfNaN(parseInt(localStorage.getItem("newItems") ?? "0"), 0)
+  );
+
   useEffect(() => {
-    console.log("User:");
-    console.log(user);
-    console.log("Stores:");
-    stores.forEach((store) => console.log(store));
-    console.log("Categories:");
-    categories.forEach((category) => console.log(category));
-    console.log("Offers:");
-    offers.forEach((offer) => console.log(offer));
-    console.log("Groceries:");
-    groceries.forEach((grocery) => console.log(grocery));
-  }, []);
+    localStorage.setItem("groceryList", JSON.stringify(groceryList));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(groceryList)]);
+
+  useEffect(() => {
+    localStorage.setItem("newItems", newItems.toString());
+  }, [newItems]);
+
+  const addToGroceryList = (grocery: Grocery, count: boolean = true) => {
+    const index = groceryList.findIndex(
+      (item) => item.grocery.id === grocery.id
+    );
+
+    if (index === -1) {
+      grocery.prices.sort((a, b) => {
+        const aFinalValue =
+          a.discount === null
+            ? a.value
+            : a.discount.unit === DiscountUnit.DOLLAR
+            ? a.value - a.discount.value
+            : a.value * ((100 - a.discount.value) / 100);
+
+        const bFinalValue =
+          b.discount === null
+            ? b.value
+            : b.discount.unit === DiscountUnit.DOLLAR
+            ? b.value - b.discount.value
+            : b.value * ((100 - b.discount.value) / 100);
+
+        return aFinalValue - bFinalValue;
+      });
+
+      setGroceryList([...groceryList, { grocery: grocery, quantity: 1 }]);
+    } else {
+      setGroceryList(
+        groceryList.map((item, i) => {
+          if (i === index) {
+            item.quantity++;
+          }
+
+          return item;
+        })
+      );
+    }
+
+    setMessage("Added to List");
+
+    if (count) {
+      setNewItems(newItems + 1);
+    }
+
+    return null;
+  };
+
+  const removeFromGroceryList = (grocery: Grocery) => {
+    const index = groceryList.findIndex(
+      (item) => item.grocery.id === grocery.id
+    );
+
+    if (index === -1) return null;
+
+    if (groceryList[index].quantity === 1) {
+      setGroceryList(
+        groceryList.filter((item) => item.grocery.id !== grocery.id)
+      );
+    } else {
+      setGroceryList(
+        groceryList.map((item, i) => {
+          if (i === index) {
+            item.quantity--;
+          }
+
+          return item;
+        })
+      );
+    }
+
+    return null;
+  };
+
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user") ?? JSON.stringify(defaultUser))
+  );
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(user)]);
 
   return (
-    <DbContext.Provider value={{ user, stores, categories, offers, groceries }}>
+    <DbContext.Provider
+      value={{
+        user,
+        setUser,
+        stores,
+        categories,
+        offers,
+        groceries,
+        groceryList,
+        addToGroceryList,
+        removeFromGroceryList,
+        newItems,
+        setNewItems,
+      }}
+    >
       {children}
     </DbContext.Provider>
   );

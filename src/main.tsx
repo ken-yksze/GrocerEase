@@ -11,11 +11,11 @@ const theme = createTheme({});
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
-      <DbContextProvider>
-        <TabContextProvider>
+      <TabContextProvider>
+        <DbContextProvider>
           <App />
-        </TabContextProvider>
-      </DbContextProvider>
+        </DbContextProvider>
+      </TabContextProvider>
     </ThemeProvider>
   </StrictMode>
 );

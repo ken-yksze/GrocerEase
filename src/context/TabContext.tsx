@@ -1,9 +1,9 @@
 import { Tabs, TabContextType } from "../type";
 import { createContext, ReactNode, useEffect, useState } from "react";
-
-const HomePage = () => {
-  return <>Home</>;
-};
+import HomePage from "../pages/HomePage";
+import ListPage from "../pages/ListPage";
+import StorePage from "../pages/StorePage";
+import ProfilePage from "../pages/ProfilePage";
 
 const tabs: Tabs = {
   Home: {
@@ -12,15 +12,15 @@ const tabs: Tabs = {
   },
   Stores: {
     icon: "hugeicons:location-01",
-    page: <>Stores</>,
+    page: <StorePage />,
   },
   List: {
     icon: "clarity:list-line",
-    page: <>List</>,
+    page: <ListPage />,
   },
   Profile: {
     icon: "hugeicons:user-circle-02",
-    page: <>Profile</>,
+    page: <ProfilePage />,
   },
 };
 
@@ -32,16 +32,22 @@ const TabContext = createContext<TabContextType>({
   setCurrentPage: () => null,
   heading: <></>,
   setHeading: () => null,
+  tabClicked: false,
+  setTabClicked: () => null,
+  message: "",
+  setMessage: () => null,
 });
 
 const TabContextProvider = ({ children }: { children: ReactNode }) => {
   const [currentTab, setCurrentTab] = useState("Home");
   const [currentPage, setCurrentPage] = useState(<HomePage />);
   const [heading, setHeading] = useState(<></>);
+  const [tabClicked, setTabClicked] = useState(false);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     setCurrentPage(tabs[currentTab].page);
-  }, [currentTab]);
+  }, [currentTab, tabClicked]);
 
   return (
     <TabContext.Provider
@@ -53,6 +59,10 @@ const TabContextProvider = ({ children }: { children: ReactNode }) => {
         setCurrentPage,
         heading,
         setHeading,
+        tabClicked,
+        setTabClicked,
+        message,
+        setMessage,
       }}
     >
       {children}
