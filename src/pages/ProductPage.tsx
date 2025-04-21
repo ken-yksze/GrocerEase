@@ -4,11 +4,20 @@ import {
   TextField,
   InputAdornment,
   Button,
+  IconButton,
 } from "@mui/material";
 import { DiscountUnit, Grocery } from "../type";
-import { useContext, useEffect } from "react";
+import {
+  useContext,
+  useEffect,
+  useState,
+  ChangeEvent,
+  KeyboardEvent,
+} from "react";
 import { TabContext } from "../context/TabContext";
 import { Icon } from "@iconify/react";
+import SearchPage from "./SearchPage";
+import { DbContext } from "../context/DbContext";
 
 const ProductPage = ({ grocery }: { grocery: Grocery }) => {
   grocery.prices.sort((a, b) => {
@@ -17,33 +26,55 @@ const ProductPage = ({ grocery }: { grocery: Grocery }) => {
         ? a.value
         : a.discount.unit === DiscountUnit.DOLLAR
         ? a.value - a.discount.value
-        : a.value * (1 - a.discount.value);
+        : a.value * ((100 - a.discount.value) / 100);
 
     const bFinalValue =
       b.discount === null
         ? b.value
         : b.discount.unit === DiscountUnit.DOLLAR
         ? b.value - b.discount.value
-        : b.value * (1 - b.discount.value);
+        : b.value * ((100 - b.discount.value) / 100);
 
     return aFinalValue - bFinalValue;
   });
 
-  const { setHeading } = useContext(TabContext);
-
-  const ProductPageHeading = () => {
-    return (
-      <Box>
-        <Typography sx={{ fontWeight: "700", fontSize: "1.66666666667em" }}>
-          Search
-        </Typography>
-      </Box>
-    );
-  };
+  const { setHeading, setCurrentPage } = useContext(TabContext);
+  const { addToGroceryList } = useContext(DbContext);
+  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
-    setHeading(ProductPageHeading);
+    const ProductPageHeading = () => {
+      return (
+        <Box>
+          <Typography sx={{ fontWeight: "700", fontSize: "1.66666666667em" }}>
+            Search
+          </Typography>
+        </Box>
+      );
+    };
+
+    setHeading(<ProductPageHeading />);
   }, [setHeading]);
+
+  const searchHandler = (search: string) => {
+    if (search === "") return;
+    setCurrentPage(<SearchPage search={search} category={""} />);
+  };
+
+  const searchIconHandler = () => {
+    searchHandler(searchInput);
+  };
+
+  const searchInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(event.target.value);
+  };
+
+  const searchEnterHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      searchHandler(searchInput);
+    }
+  };
 
   return (
     <Box
@@ -59,20 +90,33 @@ const ProductPage = ({ grocery }: { grocery: Grocery }) => {
         sx={{
           width: "100%",
           height: "4.58333333333em",
-          backgroundColor: "white",
           marginBottom: "2.39583333333em",
-          borderRadius: "1em",
+          borderRadius: "1rem",
+          "& .MuiOutlinedInput-root": {
+            width: "100%",
+            height: "4.58333333333em",
+            backgroundColor: "white",
+          },
         }}
         placeholder="Search"
         slotProps={{
           input: {
             endAdornment: (
               <InputAdornment position="end">
-                <Icon icon="clarity:search-line" width="1.5em" height="1.5em" />
+                <IconButton size="small" onClick={searchIconHandler}>
+                  <Icon
+                    icon="clarity:search-line"
+                    width="1.5em"
+                    height="1.5em"
+                  />
+                </IconButton>
               </InputAdornment>
             ),
           },
         }}
+        onKeyDown={searchEnterHandler}
+        value={searchInput}
+        onChange={searchInputHandler}
       />
       <Box sx={{ width: "100%", display: "flex", flexDirection: "column" }}>
         <Typography sx={{ fontWeight: "700", fontSize: "1.33333333333em" }}>
@@ -98,7 +142,14 @@ const ProductPage = ({ grocery }: { grocery: Grocery }) => {
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", gap: "1em" }}>
           <Typography sx={{ fontWeight: "700", fontSize: "1.25em" }}>
-            ${grocery.prices[0].value.toFixed(2)}
+            $
+            {(grocery.prices[0].discount === null
+              ? grocery.prices[0].value
+              : grocery.prices[0].discount.unit === DiscountUnit.DOLLAR
+              ? grocery.prices[0].value - grocery.prices[0].discount.value
+              : grocery.prices[0].value *
+                ((100 - grocery.prices[0].discount.value) / 100)
+            ).toFixed(2)}
           </Typography>
           <Typography
             sx={{
@@ -140,7 +191,13 @@ const ProductPage = ({ grocery }: { grocery: Grocery }) => {
               <Typography
                 sx={{ fontWeight: "700", fontSize: "1.16666666667em" }}
               >
-                ${price.value.toFixed(2)}
+                $
+                {(price.discount === null
+                  ? price.value
+                  : price.discount.unit === DiscountUnit.DOLLAR
+                  ? price.value - price.discount.value
+                  : price.value * ((100 - price.discount.value) / 100)
+                ).toFixed(2)}
               </Typography>
             </Box>
           ))}
@@ -284,16 +341,44 @@ const ProductPage = ({ grocery }: { grocery: Grocery }) => {
               {grocery.fat}g
             </Typography>
           </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingX: "0.41666666666em",
+              backgroundColor: "white",
+            }}
+          >
+            <Typography sx={{ fontSize: "1.16666666667em" }}>
+              Health Score
+            </Typography>
+            <Typography
+              sx={{
+                fontWeight: "700",
+                fontSize: "1.16666666667em",
+              }}
+            >
+              {grocery.healthScore}
+            </Typography>
+          </Box>
         </Box>
       </Box>
       <Button
         variant="contained"
         sx={{
+          ":hover": { boxShadow: "none" },
           width: "12.1666666667em",
           height: "2.58333333333em",
           borderRadius: "0.64583333333em",
           backgroundColor: "black",
           alignSelf: "flex-end",
+          boxShadow: "none",
+        }}
+        disableRipple
+        onClick={(event) => {
+          event.stopPropagation();
+          addToGroceryList(grocery);
         }}
       >
         ADD TO LIST

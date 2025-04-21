@@ -4,7 +4,8 @@ import { Box, IconButton } from "@mui/material";
 import { Icon } from "@iconify/react";
 
 const TabBar = () => {
-  const { tabs, currentTab, setCurrentTab } = useContext(TabContext);
+  const { tabs, currentTab, setCurrentTab, tabClicked, setTabClicked } =
+    useContext(TabContext);
 
   return (
     <Box
@@ -13,12 +14,29 @@ const TabBar = () => {
         display: "flex",
         justifyContent: "space-evenly",
         alignItems: "flex-end",
+        position: "relative",
       }}
     >
+      <Box
+        sx={{
+          width: "100%",
+          height: "5rem",
+          position: "absolute",
+          backgroundColor: "white",
+          left: 0,
+          bottom: 0,
+        }}
+      />
       {Object.keys(tabs).map((tab, i) => (
         <IconButton
           key={i}
-          onClick={() => setCurrentTab(tab)}
+          onClick={() => {
+            if (currentTab === tab) {
+              setTabClicked(!tabClicked);
+            } else {
+              setCurrentTab(tab);
+            }
+          }}
           sx={{
             ":focus": { outline: "none" },
             ":hover": { background: "none" },
@@ -45,6 +63,7 @@ const TabBar = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                backgroundColor: "white",
               }}
             >
               <Icon icon={tabs[tab].icon} width="2.75em" height="2.75em" />

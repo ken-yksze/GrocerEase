@@ -17,6 +17,10 @@ export interface TabContextType {
   setCurrentPage: Dispatch<SetStateAction<ReactElement>>;
   heading: ReactElement;
   setHeading: Dispatch<SetStateAction<ReactElement>>;
+  tabClicked: boolean;
+  setTabClicked: Dispatch<SetStateAction<boolean>>;
+  message: string;
+  setMessage: Dispatch<SetStateAction<string>>;
 }
 
 export enum DiscountUnit {
@@ -33,8 +37,7 @@ export interface Store {
   id: number;
   name: string;
   address: string;
-  lat: number;
-  lng: number;
+  image: string;
 }
 
 export interface Discount {
@@ -85,23 +88,23 @@ export interface GroceryListItem {
   quantity: number;
 }
 
-export interface GroceryList {
-  name: string;
-  items: GroceryListItem[];
-}
-
 export interface User {
   id: number;
   firstName: string;
   lastName: string;
   thumbnail: string;
-  groceryLists: GroceryList[];
 }
 
 export interface DbContextType {
   user: User;
+  setUser: Dispatch<SetStateAction<User>>;
   stores: Store[];
   categories: Category[];
   offers: Offer[];
   groceries: Grocery[];
+  groceryList: GroceryListItem[];
+  addToGroceryList: (grocery: Grocery, count?: boolean) => null;
+  removeFromGroceryList: (grocery: Grocery) => null;
+  newItems: number;
+  setNewItems: Dispatch<SetStateAction<number>>;
 }

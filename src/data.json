@@ -2,31 +2,27 @@
   "stores": [
     {
       "id": 1,
-      "name": "Walmart Supercentre",
-      "address": "2245 Islington Ave, Toronto, ON M9W 3W6",
-      "lat": 43.7142165,
-      "lng": -79.5558925
+      "name": "Walmart",
+      "address": "799 Milner Ave, Scarborough, ON M1B 3C3",
+      "image": "walmart.png"
     },
     {
       "id": 2,
-      "name": "Costco Wholesale",
-      "address": "55 New Huntington Rd, Vaughan, ON L4H 0S8",
-      "lat": 43.7699797,
-      "lng": -79.6422665
+      "name": "Costco",
+      "address": "2260 Islington Ave, Toronto, ON M9W 3W8",
+      "image": "costco.webp"
     },
     {
       "id": 3,
       "name": "Metro",
       "address": "201 Lloyd Manor Rd, Toronto, ON M9B 5K6",
-      "lat": 43.6751567,
-      "lng": -79.5581709
+      "image": "metro.png"
     },
     {
       "id": 4,
-      "name": "Jason's NOFRILLS Etobicoke",
+      "name": "NoFrills",
       "address": "1530 Albion Rd, Etobicoke, ON M9V 1B4",
-      "lat": 43.7219291,
-      "lng": -79.692969
+      "image": "nofrills.png"
     }
   ],
   "categories": [
@@ -61,6 +57,36 @@
       "fat": 0.5,
       "healthScore": 8,
       "healthFactors": ["Low Carb", "Probiotic", "No Sugar Added"]
+    },
+    {
+      "id": 2,
+      "name": "Milk",
+      "fullName": "Milk",
+      "image": "milk.png",
+      "categoryId": 1,
+      "priceType": "quantity",
+      "weight": 500,
+      "calories": 130,
+      "protein": 16,
+      "carbohydrates": 3,
+      "fat": 1,
+      "healthScore": 10,
+      "healthFactors": ["Low Carb", "No Sugar Added"]
+    },
+    {
+      "id": 3,
+      "name": "Yogurt",
+      "fullName": "Yogurt",
+      "image": "yogurt.png",
+      "categoryId": 1,
+      "priceType": "quantity",
+      "weight": 300,
+      "calories": 110,
+      "protein": 14,
+      "carbohydrates": 5,
+      "fat": 2,
+      "healthScore": 10,
+      "healthFactors": ["Low Carb"]
     }
   ],
   "prices": [
@@ -78,11 +104,62 @@
       "storeId": 3,
       "groceryId": 1
     },
+
     {
       "id": 3,
       "value": 6.0,
       "discount": null,
       "storeId": 4,
+      "groceryId": 1
+    },
+    {
+      "id": 4,
+      "value": 5.89,
+      "discount": {
+        "value": 3,
+        "unit": "$"
+      },
+      "storeId": 1,
+      "groceryId": 2
+    },
+    {
+      "id": 5,
+      "value": 6.89,
+      "discount": {
+        "value": 3,
+        "unit": "$"
+      },
+      "storeId": 1,
+      "groceryId": 3
+    },
+    {
+      "id": 6,
+      "value": 7.89,
+      "discount": {
+        "value": 1,
+        "unit": "$"
+      },
+      "storeId": 2,
+      "groceryId": 2
+    },
+    {
+      "id": 7,
+      "value": 8.89,
+      "discount": {
+        "value": 1.5,
+        "unit": "$"
+      },
+      "storeId": 2,
+      "groceryId": 3
+    },
+    {
+      "id": 8,
+      "value": 9.0,
+      "discount": {
+        "value": 30,
+        "unit": "%"
+      },
+      "storeId": 2,
       "groceryId": 1
     }
   ],
