@@ -412,7 +412,7 @@ const StorePage = () => {
                 gap: "0.5rem",
                 fontWeight: "700",
                 fontSize: "0.83333333333rem",
-                padding: "0.5rem",
+                padding: "0.5rem 0.75rem 0.5rem 0.5rem",
                 borderRadius: "1rem",
               }}
             >
